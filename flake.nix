@@ -16,11 +16,11 @@
           config = { allowUnfree = true; };
         };
         insync-v3 = pkgs.insync-v3.overrideAttrs (old: rec {
-          version = "3.3.5.40925";
+          version = "3.6.1.50206";
 
           src = pkgs.fetchurl {
             url = "http://s.insynchq.com/builds/${old.pname}_${version}-focal_amd64.deb";
-            sha256 = "sha256-lYlG/8d7teX98F5eDxm4EdBfFs7Sz3Td4kKLC6KZqnQ=";
+            sha256 = "sha256-OHZoZlLsLFkN5juvQP4TF3laDYQ7g4NULragJaZRniY=";
           };
           buildInputs = old.buildInputs ++ [
             pkgs.xorg.libxcb
