@@ -22,7 +22,7 @@
           inherit system;
           config = { allowUnfree = true; };
         };
-        insync-v3 = pkgs.insync-v3.overrideAttrs (old: rec {
+        insync-v3 = pkgs-pinned.insync-v3.overrideAttrs (old: rec {
           version = "3.6.1.50206";
 
           src = pkgs.fetchurl {
