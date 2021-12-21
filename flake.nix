@@ -22,7 +22,9 @@
           inherit system;
           config = { allowUnfree = true; };
         };
-        insync-v3 = pkgs-pinned.libsForQt515.callPackage ./insync-v3.nix { };
+        insync-v3 = pkgs-pinned.libsForQt515.callPackage ./insync-v3.nix {
+          alsaLib = pkgs.alsa-lib;
+        };
       in {
         packages.insync = insync-v3;
         devShell = pkgs.mkShell { buildInputs = [ pkgs.xdg_utils insync-v3 ]; };
