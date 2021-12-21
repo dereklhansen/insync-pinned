@@ -29,7 +29,18 @@
             url = "http://s.insynchq.com/builds/${old.pname}_${version}-focal_amd64.deb";
             sha256 = "sha256-OHZoZlLsLFkN5juvQP4TF3laDYQ7g4NULragJaZRniY=";
           };
-          buildInputs = old.buildInputs ++ [
+          buildInputs = with pkgs-pinned; [
+			pkgs.alsa-lib
+			libGL
+			libthai
+			# xorg.libxcb
+			nss
+			qt515.qtlocation
+			qt515.qtvirtualkeyboard
+			qt515.qtwebchannel
+			qt515.qtwebengine
+			qt515.qtwebsockets
+			wayland
             pkgs-pinned.xorg.libxcb
             pkgs-pinned.libxkbcommon
             pkgs-pinned.libdrm
@@ -48,6 +59,8 @@
       in {
         packages.insync = insync-v3;
         devShell = pkgs.mkShell { buildInputs = [ pkgs.xdg_utils insync-v3 ]; };
+        inherit nixpkgs;
+        inherit nixpkgs-pinned;
       }
     );
 }
