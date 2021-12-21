@@ -22,41 +22,7 @@
           inherit system;
           config = { allowUnfree = true; };
         };
-        insync-v3 = pkgs-pinned.insync-v3.overrideAttrs (old: rec {
-          version = "3.6.1.50206";
-
-          src = pkgs.fetchurl {
-            url = "http://s.insynchq.com/builds/${old.pname}_${version}-focal_amd64.deb";
-            sha256 = "sha256-OHZoZlLsLFkN5juvQP4TF3laDYQ7g4NULragJaZRniY=";
-          };
-          buildInputs = with pkgs-pinned; [
-			pkgs.alsa-lib
-			libGL
-			libthai
-			# xorg.libxcb
-			nss
-			qt515.qtlocation
-			qt515.qtvirtualkeyboard
-			qt515.qtwebchannel
-			qt515.qtwebengine
-			qt515.qtwebsockets
-			wayland
-            pkgs-pinned.xorg.libxcb
-            pkgs-pinned.libxkbcommon
-            pkgs-pinned.libdrm
-          ];
-        nativeBuildInputs = with pkgs-pinned; [ autoPatchelfHook dpkg makeWrapper qt515.wrapQtAppsHook ];
-        installPhase = ''
-          mkdir -p $out/bin $out/lib $out/share
-          cp -R usr/* $out/
-          rm $out/lib/insync/libGLX.so.0
-          rm $out/lib/insync/libdrm*.so*
-          rm $out/lib/insync/libxkbcommon*.so*
-          rm $out/lib/insync/libQt5*
-          sed -i 's|/usr/lib/insync|/lib/insync|' "$out/bin/insync"
-          wrapQtApp "$out/lib/insync/insync"
-        '';
-        });
+        insync-v3 = pkgs-pinned.libsForQt515.callPackage ./insync-v3.nix { };
       in {
         packages.insync = insync-v3;
         devShell = pkgs.mkShell { buildInputs = [ pkgs.xdg_utils insync-v3 ]; };
