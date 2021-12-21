@@ -45,6 +45,7 @@
             pkgs-pinned.libxkbcommon
             pkgs-pinned.libdrm
           ];
+        nativeBuildInputs = with pkgs-pinned; [ autoPatchelfHook dpkg makeWrapper qt515.wrapQtAppsHook ];
         installPhase = ''
           mkdir -p $out/bin $out/lib $out/share
           cp -R usr/* $out/
