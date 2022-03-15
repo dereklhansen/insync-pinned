@@ -23,10 +23,10 @@
 stdenv.mkDerivation rec {
 
   pname = "insync";
-  version = "3.6.1.50206";
+  version = "3.7.3.50326";
   src = fetchurl {
     url = "http://s.insynchq.com/builds/${pname}_${version}-focal_amd64.deb";
-    sha256 = "sha256-OHZoZlLsLFkN5juvQP4TF3laDYQ7g4NULragJaZRniY=";
+    sha256 = "sha256-yN1J1JI3Sx1uGwTvxECok89K5HN9+6vV+3sxVYrDFhY=";
   };
 
   postPatch = ''
